@@ -4,7 +4,7 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 10
+Release  : 11
 URL      : https://pypi.python.org/packages/source/o/ordereddict/ordereddict-1.1.tar.gz
 Source0  : https://pypi.python.org/packages/source/o/ordereddict/ordereddict-1.1.tar.gz
 Summary  : UNKNOWN
