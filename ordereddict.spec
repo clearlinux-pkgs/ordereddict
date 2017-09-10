@@ -4,12 +4,13 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 17
+Release  : 18
 URL      : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Source0  : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Summary  : UNKNOWN
 Group    : Development/Tools
 License  : MIT
+Requires: ordereddict-legacypython
 Requires: ordereddict-python
 BuildRequires : pbr
 BuildRequires : pip
@@ -20,9 +21,18 @@ BuildRequires : setuptools
 %description
 No detailed description available
 
+%package legacypython
+Summary: legacypython components for the ordereddict package.
+Group: Default
+
+%description legacypython
+legacypython components for the ordereddict package.
+
+
 %package python
 Summary: python components for the ordereddict package.
 Group: Default
+Requires: ordereddict-legacypython
 
 %description python
 python components for the ordereddict package.
@@ -36,12 +46,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503125319
+export SOURCE_DATE_EPOCH=1505008041
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1503125319
+export SOURCE_DATE_EPOCH=1505008041
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
@@ -52,7 +62,10 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
-%files python
+%files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files python
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
