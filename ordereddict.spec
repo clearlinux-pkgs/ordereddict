@@ -14,7 +14,7 @@ Requires: ordereddict-python3
 Requires: ordereddict-python
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
