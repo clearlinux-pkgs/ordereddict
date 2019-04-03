@@ -4,34 +4,19 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 39
+Release  : 40
 URL      : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Source0  : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Summary  : UNKNOWN
 Group    : Development/Tools
 License  : MIT
-Requires: ordereddict-python3
-Requires: ordereddict-license
-Requires: ordereddict-python
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python-core
-BuildRequires : python3-core
-BuildRequires : python3-dev
-BuildRequires : setuptools
-BuildRequires : setuptools-legacypython
+Requires: ordereddict-license = %{version}-%{release}
+Requires: ordereddict-python = %{version}-%{release}
+Requires: ordereddict-python3 = %{version}-%{release}
+BuildRequires : buildreq-distutils3
 
 %description
 No detailed description available
-
-%package legacypython
-Summary: legacypython components for the ordereddict package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the ordereddict package.
-
 
 %package license
 Summary: license components for the ordereddict package.
@@ -44,7 +29,7 @@ license components for the ordereddict package.
 %package python
 Summary: python components for the ordereddict package.
 Group: Default
-Requires: ordereddict-python3
+Requires: ordereddict-python3 = %{version}-%{release}
 
 %description python
 python components for the ordereddict package.
@@ -67,17 +52,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530375611
-python2 setup.py build -b py2
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1554324200
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
-export SOURCE_DATE_EPOCH=1530375611
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/ordereddict
-cp LICENSE %{buildroot}/usr/share/doc/ordereddict/LICENSE
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/package-licenses/ordereddict
+cp LICENSE %{buildroot}/usr/share/package-licenses/ordereddict/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -85,13 +69,9 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
-
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/ordereddict/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/ordereddict/LICENSE
 
 %files python
 %defattr(-,root,root,-)
