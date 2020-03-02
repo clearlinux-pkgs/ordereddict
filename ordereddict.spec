@@ -4,10 +4,10 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 45
+Release  : 46
 URL      : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Source0  : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
-Summary  : UNKNOWN
+Summary  : A drop-in substitute for Py2.7's new collections.OrderedDict that works in Python 2.4-2.6.
 Group    : Development/Tools
 License  : MIT
 Requires: ordereddict-license = %{version}-%{release}
@@ -16,7 +16,11 @@ Requires: ordereddict-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
-No detailed description available
+Drop-in substitute for Py2.7's new collections.OrderedDict. The recipe has big-oh 
+performance that matches regular dictionaries (amortized O(1) 
+insertion/deletion/lookup and O(n) iteration/repr/copy/equality_testing).
+
+Originally based on http://code.activestate.com/recipes/576693/
 
 %package license
 Summary: license components for the ordereddict package.
@@ -39,6 +43,7 @@ python components for the ordereddict package.
 Summary: python3 components for the ordereddict package.
 Group: Default
 Requires: python3-core
+Provides: pypi(ordereddict)
 
 %description python3
 python3 components for the ordereddict package.
@@ -46,13 +51,20 @@ python3 components for the ordereddict package.
 
 %prep
 %setup -q -n ordereddict-1.1
+cd %{_builddir}/ordereddict-1.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1554324200
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1583193169
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -60,7 +72,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ordereddict
-cp LICENSE %{buildroot}/usr/share/package-licenses/ordereddict/LICENSE
+cp %{_builddir}/ordereddict-1.1/LICENSE %{buildroot}/usr/share/package-licenses/ordereddict/38abaf3c887f1799769b604e6d1ada4fcb81f8a0
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -71,7 +83,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/ordereddict/LICENSE
+/usr/share/package-licenses/ordereddict/38abaf3c887f1799769b604e6d1ada4fcb81f8a0
 
 %files python
 %defattr(-,root,root,-)
