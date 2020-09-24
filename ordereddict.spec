@@ -4,7 +4,7 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 46
+Release  : 47
 URL      : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Source0  : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Summary  : A drop-in substitute for Py2.7's new collections.OrderedDict that works in Python 2.4-2.6.
