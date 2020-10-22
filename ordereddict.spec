@@ -4,10 +4,10 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 47
+Release  : 48
 URL      : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Source0  : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
-Summary  : A drop-in substitute for Py2.7's new collections.OrderedDict that works in Python 2.4-2.6.
+Summary  : UNKNOWN
 Group    : Development/Tools
 License  : MIT
 Requires: ordereddict-license = %{version}-%{release}
@@ -16,11 +16,7 @@ Requires: ordereddict-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
-Drop-in substitute for Py2.7's new collections.OrderedDict. The recipe has big-oh 
-performance that matches regular dictionaries (amortized O(1) 
-insertion/deletion/lookup and O(n) iteration/repr/copy/equality_testing).
-
-Originally based on http://code.activestate.com/recipes/576693/
+No detailed description available
 
 %package license
 Summary: license components for the ordereddict package.
@@ -58,12 +54,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583193169
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1603397450
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
