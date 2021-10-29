@@ -4,7 +4,7 @@
 #
 Name     : ordereddict
 Version  : 1.1
-Release  : 58
+Release  : 59
 URL      : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Source0  : http://pypi.debian.net/ordereddict/ordereddict-1.1.tar.gz
 Summary  : UNKNOWN
